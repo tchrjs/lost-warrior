@@ -9,14 +9,14 @@ const CHARACTER_SPEED: int = 1
 var path: Array[Vector2i]
 
 func move_along_path(_path: Array[Vector2i]) -> void:
-	if _path.is_empty():
-		return
-
 	path = _path
 	var front: Vector2i = path.front()
 	var back: Vector2i = path.back()
 	if front != back:
 		sprite.flip_h = front > back
+
+	if path.is_empty():
+		return
 
 	grid_select.set_process(false)
 	grid_select.set_process_input(false)

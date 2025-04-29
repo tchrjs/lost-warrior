@@ -21,7 +21,7 @@ func _ready() -> void:
 func find_path(start_position: Vector2i, end_position: Vector2i) -> Array[Vector2i]:
 	start_point = ground_layer.local_to_map(start_position)
 	end_point = ground_layer.local_to_map(end_position)
-	path = astar_grid.get_id_path(start_point, end_point).slice(1)
+	path = astar_grid.get_id_path(start_point, end_point)
 	return path
 
 # Use local position to get global position.

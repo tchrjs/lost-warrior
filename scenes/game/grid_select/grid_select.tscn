@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://dltre052l1wbn" path="res://scenes/game/grid_select/grid_select.gd" id="1_xot3d"]
 [ext_resource type="Texture2D" uid="uid://btb6bw1waetsk" path="res://assets/art/grid_select.png" id="2_xpton"]
 
-[node name="GridSelect" type="Node2D" node_paths=PackedStringArray("game_map")]
+[node name="GridSelect" type="Node2D"]
 script = ExtResource("1_xot3d")
-game_map = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_xpton")
