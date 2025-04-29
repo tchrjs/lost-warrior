@@ -3,14 +3,19 @@
 [ext_resource type="Script" uid="uid://0ho56f0t08re" path="res://scenes/game/game.gd" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://et0ngbb4rcs8" path="res://scenes/game/game_map/game_map.tscn" id="2_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://v2e7x3fbjtap" path="res://scenes/game/player/player.tscn" id="3_0sr1o"]
-[ext_resource type="Script" uid="uid://dsjvmm0wdbtph" path="res://scenes/game/player/player.gd" id="4_kelw5"]
+[ext_resource type="PackedScene" uid="uid://bpik76b7iulsb" path="res://scenes/game/grid_select/grid_select.tscn" id="5_lfrn8"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_sul5r")
 
 [node name="GameMap" parent="." instance=ExtResource("2_0sr1o")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("3_0sr1o")]
+[node name="Player" parent="." node_paths=PackedStringArray("game_map", "grid_select") instance=ExtResource("3_0sr1o")]
 position = Vector2(56, 40)
-script = ExtResource("4_kelw5")
 game_map = NodePath("../GameMap")
+grid_select = NodePath("../GridSelect")
+
+[node name="GridSelect" parent="." node_paths=PackedStringArray("game_map", "player") instance=ExtResource("5_lfrn8")]
+position = Vector2(56, 40)
+game_map = NodePath("../GameMap")
+player = NodePath("../Player")

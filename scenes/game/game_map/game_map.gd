@@ -24,8 +24,14 @@ func find_path(start_position: Vector2i, end_position: Vector2i) -> Array[Vector
 	path = astar_grid.get_id_path(start_point, end_point).slice(1)
 	return path
 
+# Use local position to get global position.
 func get_target_position(selected_point: Vector2i) -> Vector2:
 	return ground_layer.map_to_local(selected_point)
+
+# Use global position to snap to local position.
+func get_snap_position(selected_point: Vector2i) -> Vector2:
+	var local_position = ground_layer.local_to_map(selected_point)
+	return get_target_position(local_position)
 
 func is_point_walkable(local_position: Vector2) -> bool:
 	var map_position: Vector2i = ground_layer.local_to_map(local_position)
