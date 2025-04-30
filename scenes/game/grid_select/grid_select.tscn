@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://btb6bw1waetsk" path="res://assets/art/grid_select.png" id="2_xpton"]
 
 [node name="GridSelect" type="Node2D"]
+z_index = 1
 script = ExtResource("1_xot3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

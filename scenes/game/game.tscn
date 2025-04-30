@@ -27,7 +27,8 @@ script = ExtResource("4_87uf6")
 
 [node name="GameMap" parent="." instance=ExtResource("2_0sr1o")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("3_0sr1o")]
+[node name="Player" parent="." node_paths=PackedStringArray("action_buttons", "game_map") instance=ExtResource("3_0sr1o")]
+action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
 game_map = NodePath("../GameMap")
 
 [node name="GridSelect" parent="." node_paths=PackedStringArray("game_map", "player", "action_buttons") instance=ExtResource("5_lfrn8")]

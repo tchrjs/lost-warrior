@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://v2e7x3fbjtap"]
+[gd_scene load_steps=4 format=3 uid="uid://v2e7x3fbjtap"]
 
 [ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="1_4m2od"]
 [ext_resource type="Script" uid="uid://dsjvmm0wdbtph" path="res://scenes/game/units/player/player.gd" id="1_t5cse"]
+[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://scenes/game/unit_overlay/unit_overlay.tscn" id="3_h3lvi"]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("sprite", "unit_overlay")]
 script = ExtResource("1_t5cse")
 sprite = NodePath("Sprite2D")
+unit_overlay = NodePath("UnitOverlay")
+
+[node name="UnitOverlay" parent="." instance=ExtResource("3_h3lvi")]
+top_level = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("1_4m2od")
 region_enabled = true
 region_rect = Rect2(80, 0, 16, 16)
