@@ -29,7 +29,9 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	var target_position: Vector2 = game_map.get_cell_global_position(path.front())
-	global_position = global_position.move_toward(target_position, move_speed)
+	if cell != path.front():
+		global_position = global_position.move_toward(target_position, move_speed)
+
 	if global_position == target_position:
 		cell = path.front()
 		path.pop_front()
