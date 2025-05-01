@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://v2e7x3fbjtap"]
+[gd_scene load_steps=6 format=3 uid="uid://v2e7x3fbjtap"]
 
 [ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="1_4m2od"]
 [ext_resource type="Script" uid="uid://dsjvmm0wdbtph" path="res://scenes/game/units/player/player.gd" id="1_t5cse"]
+[ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://scenes/game/components/attack_component/attack_component.tscn" id="4_3pyd5"]
 [ext_resource type="PackedScene" uid="uid://4bje0lbbccnr" path="res://scenes/game/components/move_component/move_component.tscn" id="4_d1d2k"]
+[ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://scenes/game/components/health_component/health_component.tscn" id="5_3pyd5"]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("move_component", "sprite")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "sprite")]
 script = ExtResource("1_t5cse")
 move_component = NodePath("MoveComponent")
+attack_component = NodePath("AttackComponent")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,3 +19,7 @@ region_enabled = true
 region_rect = Rect2(80, 0, 16, 16)
 
 [node name="MoveComponent" parent="." instance=ExtResource("4_d1d2k")]
+
+[node name="AttackComponent" parent="." instance=ExtResource("4_3pyd5")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_3pyd5")]
