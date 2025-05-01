@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsh5154115yxs"]
 
 [ext_resource type="Texture2D" uid="uid://d1d6wpi7uucml" path="res://assets/art/dungeon_tileset.png" id="1_1ywpj"]
-[ext_resource type="Script" uid="uid://bftjcumbfosk5" path="res://scenes/game/unit_overlay/unit_overlay.gd" id="1_rqksi"]
+[ext_resource type="Script" uid="uid://bftjcumbfosk5" path="res://scenes/game/grid_overlay/grid_overlay.gd" id="1_rqksi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exws3"]
 texture = ExtResource("1_1ywpj")
@@ -109,6 +109,6 @@ texture = ExtResource("1_1ywpj")
 [sub_resource type="TileSet" id="TileSet_1ccnh"]
 sources/0 = SubResource("TileSetAtlasSource_exws3")
 
-[node name="UnitOverlay" type="TileMapLayer"]
+[node name="GridOverlay" type="TileMapLayer"]
 tile_set = SubResource("TileSet_1ccnh")
 script = ExtResource("1_rqksi")
