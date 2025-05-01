@@ -9,10 +9,11 @@
 [ext_resource type="Script" uid="uid://brwmd6hywtyyt" path="res://addons/state_machine/state_machine.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://scenes/game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("game_map", "player")]
+[node name="Game" type="Node" node_paths=PackedStringArray("game_map", "player", "enemy_container")]
 script = ExtResource("1_sul5r")
 game_map = NodePath("GameMap")
 player = NodePath("Player")
+enemy_container = NodePath("EnemyContainer")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_5i0tg")
@@ -35,6 +36,8 @@ game_map = NodePath("../GameMap")
 game_map = NodePath("../GameMap")
 player = NodePath("../Player")
 action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
+
+[node name="EnemyContainer" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
