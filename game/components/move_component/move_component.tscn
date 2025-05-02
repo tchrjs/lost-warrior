@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://4bje0lbbccnr"]
 
-[ext_resource type="Script" uid="uid://ld6826ppal47" path="res://scenes/game/components/move_component/move_component.gd" id="1_vi152"]
-[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://scenes/game/grid_overlay/grid_overlay.tscn" id="2_otq0v"]
+[ext_resource type="Script" uid="uid://ld6826ppal47" path="res://game/components/move_component/move_component.gd" id="1_vi152"]
+[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://game/grid_overlay/grid_overlay.tscn" id="2_otq0v"]
 
 [node name="MoveComponent" type="Node2D" node_paths=PackedStringArray("grid_overlay")]
 script = ExtResource("1_vi152")

@@ -44,13 +44,16 @@ func get_snap_position(_local_position: Vector2i) -> Vector2:
 	var grid_position: Vector2i = get_map_position(_local_position)
 	return get_local_position(grid_position)
 
-func is_point_walkable(local_position: Vector2) -> bool:
-	var map_position: Vector2i = ground_layer.local_to_map(local_position)
-	if astar_grid.is_in_boundsv(map_position):
-		return not astar_grid.is_point_solid(map_position)
+func is_point_walkable(cell: Vector2) -> bool:
+	if astar_grid.is_in_boundsv(cell):
+		return not astar_grid.is_point_solid(cell)
 	return false
 
-func flood_fill(map_position: Vector2i, max_distance: int) -> Array[Vector2i]:
+func is_within_grid(local_position: Vector2) -> bool:
+	var map_position: Vector2i = ground_layer.local_to_map(local_position)
+	return astar_grid.is_in_boundsv(map_position)
+
+func flood_fill(map_position: Vector2i, max_distance: int, ignore_solid: bool = false) -> Array[Vector2i]:
 	var array: Array[Vector2i] = []
 	var stack: Array[Vector2i] = [map_position]
 
@@ -70,9 +73,11 @@ func flood_fill(map_position: Vector2i, max_distance: int) -> Array[Vector2i]:
 		array.append(current)
 
 		for direction: Vector2i in DIRECTIONS:
-			var coordinates: Vector2i = current + direction
-			if coordinates in array:
+			var cell: Vector2i = current + direction
+			if ignore_solid and !is_point_walkable(cell):
 				continue
-			stack.append(coordinates)
+			if cell in array:
+				continue
+			stack.append(cell)
 	array.remove_at(0)
 	return array

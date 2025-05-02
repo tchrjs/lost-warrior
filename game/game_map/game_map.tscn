@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://et0ngbb4rcs8"]
 
-[ext_resource type="Script" uid="uid://bc4bfok66tbjh" path="res://scenes/game/game_map/game_map.gd" id="1_2suwj"]
+[ext_resource type="Script" uid="uid://bc4bfok66tbjh" path="res://game/game_map/game_map.gd" id="1_2suwj"]
 [ext_resource type="Texture2D" uid="uid://d1d6wpi7uucml" path="res://assets/art/dungeon_tileset.png" id="2_fmw07"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sr1o"]

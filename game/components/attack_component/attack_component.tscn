@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5mktnhn7lyx4"]
 
-[ext_resource type="Script" uid="uid://d2nb7dq1yy4ih" path="res://scenes/game/components/attack_component/attack_component.gd" id="1_htgjh"]
-[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://scenes/game/grid_overlay/grid_overlay.tscn" id="2_w0ksp"]
+[ext_resource type="Script" uid="uid://d2nb7dq1yy4ih" path="res://game/components/attack_component/attack_component.gd" id="1_htgjh"]
+[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://game/grid_overlay/grid_overlay.tscn" id="2_w0ksp"]
 
 [node name="AttackComponent" type="Node2D" node_paths=PackedStringArray("grid_overlay")]
 top_level = true

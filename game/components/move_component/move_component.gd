@@ -15,7 +15,7 @@ var path: Array[Vector2i]
 # Toggle grid overlay of cells the unit can move to.
 func toggle_move_range(toggled_on: bool) -> void:
 	if toggled_on:
-		grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance))
+		grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance, true))
 		grid_overlay.show()
 	else:
 		grid_overlay.clear()
@@ -27,10 +27,6 @@ func has_cell_in_area(cell: Vector2i) -> bool:
 # Sets path towards new destination.
 func move_along_path(_path: Array[Vector2i]) -> void:
 	path = _path
-	var front: Vector2i = path.front()
-	var back: Vector2i = path.back()
-	if front != back:
-		unit.sprite.flip_h = front > back
 
 # Move towards selected position.
 func _physics_process(_delta: float) -> void:
@@ -38,6 +34,11 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	var target_position: Vector2 = unit.game_map.get_local_position(path.front())
+	var front: Vector2i = path.front()
+
+	if front != unit.cell and front.x != unit.cell.x:
+		unit.sprite.flip_h = front.x < unit.cell.x
+
 	if unit.cell != path.front():
 		unit.global_position = unit.global_position.move_toward(target_position, speed)
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3a0ux8kxfpug"]
 
 [ext_resource type="Theme" uid="uid://doau1vx6lmsei" path="res://resources/game_ui_theme.tres" id="1_h0lyd"]
-[ext_resource type="Script" uid="uid://c6cfqduv843qd" path="res://scenes/game/action_buttons/action_buttons.gd" id="1_jjd2i"]
+[ext_resource type="Script" uid="uid://c6cfqduv843qd" path="res://game/action_buttons/action_buttons.gd" id="1_jjd2i"]
 
 [node name="ActionButtons" type="Control" node_paths=PackedStringArray("move_button", "attack_button", "defend_button", "end_button")]
 layout_mode = 3

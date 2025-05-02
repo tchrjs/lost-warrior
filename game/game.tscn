@@ -1,19 +1,19 @@
 [gd_scene load_steps=9 format=3 uid="uid://qejox0nki81w"]
 
-[ext_resource type="Script" uid="uid://0ho56f0t08re" path="res://scenes/game/game.gd" id="1_sul5r"]
-[ext_resource type="PackedScene" uid="uid://et0ngbb4rcs8" path="res://scenes/game/game_map/game_map.tscn" id="2_0sr1o"]
-[ext_resource type="PackedScene" uid="uid://v2e7x3fbjtap" path="res://scenes/game/units/player/player.tscn" id="3_0sr1o"]
-[ext_resource type="Script" uid="uid://cedqpjvaak740" path="res://scenes/game/states/player_turn.gd" id="3_bdhmt"]
-[ext_resource type="Script" uid="uid://dw81mb5caitsa" path="res://scenes/game/states/enemy_turn.gd" id="4_87uf6"]
-[ext_resource type="PackedScene" uid="uid://bpik76b7iulsb" path="res://scenes/game/grid_select/grid_select.tscn" id="5_lfrn8"]
+[ext_resource type="Script" uid="uid://0ho56f0t08re" path="res://game/game.gd" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://et0ngbb4rcs8" path="res://game/game_map/game_map.tscn" id="2_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://v2e7x3fbjtap" path="res://game/units/player/player.tscn" id="3_0sr1o"]
+[ext_resource type="Script" uid="uid://cedqpjvaak740" path="res://game/states/player_turn.gd" id="3_bdhmt"]
+[ext_resource type="Script" uid="uid://dw81mb5caitsa" path="res://game/states/enemy_turn.gd" id="4_87uf6"]
+[ext_resource type="PackedScene" uid="uid://bpik76b7iulsb" path="res://game/grid_select/grid_select.tscn" id="5_lfrn8"]
 [ext_resource type="Script" uid="uid://brwmd6hywtyyt" path="res://addons/state_machine/state_machine.gd" id="6_5i0tg"]
-[ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://scenes/game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
+[ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("game_map", "player", "enemy_container")]
+[node name="Game" type="Node" node_paths=PackedStringArray("game_map", "player", "units")]
 script = ExtResource("1_sul5r")
 game_map = NodePath("GameMap")
-player = NodePath("Player")
-enemy_container = NodePath("EnemyContainer")
+player = NodePath("Units/Player")
+units = NodePath("Units")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_5i0tg")
@@ -28,16 +28,16 @@ script = ExtResource("4_87uf6")
 
 [node name="GameMap" parent="." instance=ExtResource("2_0sr1o")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("action_buttons", "game_map") instance=ExtResource("3_0sr1o")]
-action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
-game_map = NodePath("../GameMap")
-
 [node name="GridSelect" parent="." node_paths=PackedStringArray("game_map", "player", "action_buttons") instance=ExtResource("5_lfrn8")]
 game_map = NodePath("../GameMap")
-player = NodePath("../Player")
+player = NodePath("../Units/Player")
 action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
 
-[node name="EnemyContainer" type="Node" parent="."]
+[node name="Units" type="Node" parent="."]
+
+[node name="Player" parent="Units" node_paths=PackedStringArray("action_buttons", "game_map") instance=ExtResource("3_0sr1o")]
+action_buttons = NodePath("../../CanvasLayer/MarginContainer/ActionButtons")
+game_map = NodePath("../../GameMap")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

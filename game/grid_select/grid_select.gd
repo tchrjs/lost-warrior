@@ -18,15 +18,15 @@ func toggle(toggled_on: bool) -> void:
 # Find path from player to mouse event click
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if game_map.is_point_walkable(event.position):
+		if action_buttons.move_button.button_pressed:
 			var cell = game_map.get_map_position(event.position)
-			if action_buttons.move_button.button_pressed:
-					if player.move_component.has_cell_in_area(cell):
-						_on_action_button_toggled(cell, event.position)
-			elif action_buttons.attack_button.button_pressed:
-				return
-			elif action_buttons.defend_button.button_pressed:
-				return
+			if game_map.is_point_walkable(cell):
+				if player.move_component.has_cell_in_area(cell):
+					_on_action_button_toggled(cell, event.position)
+		elif action_buttons.attack_button.button_pressed:
+			return
+		elif action_buttons.defend_button.button_pressed:
+			return
 
 func _on_action_button_toggled(cell: Vector2i, mouse_position: Vector2i) -> void:
 	if not player.move_component.has_cell_in_area(cell):
@@ -39,7 +39,7 @@ func _on_action_button_toggled(cell: Vector2i, mouse_position: Vector2i) -> void
 
 func _process(_delta: float) -> void:
 	var mouse_position = get_global_mouse_position()
-	if game_map.is_point_walkable(mouse_position):
+	if game_map.is_within_grid(mouse_position):
 		global_position = game_map.get_snap_position(mouse_position)
 		show()
 	else:
