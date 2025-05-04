@@ -15,7 +15,7 @@ var path: Array[Vector2i]
 # Toggle grid overlay of cells the unit can move to.
 func toggle_move_range(toggled_on: bool) -> void:
 	if toggled_on:
-		grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance, true))
+		grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance, false))
 		grid_overlay.show()
 	else:
 		grid_overlay.clear()

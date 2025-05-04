@@ -53,31 +53,33 @@ func is_within_grid(local_position: Vector2) -> bool:
 	var map_position: Vector2i = ground_layer.local_to_map(local_position)
 	return astar_grid.is_in_boundsv(map_position)
 
-func flood_fill(map_position: Vector2i, max_distance: int, ignore_solid: bool = false) -> Array[Vector2i]:
-	var array: Array[Vector2i] = []
-	var stack: Array[Vector2i] = [map_position]
+func flood_fill(map_position: Vector2i, max_distance: int, ignore_solid: bool = true) -> Array[Vector2i]:
+	var visited: Dictionary = {}
+	var result: Array[Vector2i] = []
+	var queue: Array = [map_position]
+	visited[map_position] = 0
 
-	while not stack.is_empty():
-		var current: Vector2i = stack.pop_back()
+	while not queue.is_empty():
+		var current: Vector2i = queue.pop_front()
+		var distance: int = visited[current]
 
-		if not astar_grid.is_in_boundsv(current):
-			continue
-		if current in array:
-			continue
-
-		var difference: Vector2i = (current - map_position).abs()
-		var distance: int = int(difference.x + difference.y)
 		if distance > max_distance:
 			continue
 
-		array.append(current)
+		result.append(current)
 
-		for direction: Vector2i in DIRECTIONS:
-			var cell: Vector2i = current + direction
-			if ignore_solid and !is_point_walkable(cell):
+		for direction in DIRECTIONS:
+			var neighbor: Vector2i = current + direction
+			if visited.has(neighbor):
 				continue
-			if cell in array:
+			if not astar_grid.is_in_boundsv(neighbor):
 				continue
-			stack.append(cell)
-	array.remove_at(0)
-	return array
+			if !ignore_solid and astar_grid.is_point_solid(neighbor):
+				continue
+
+			visited[neighbor] = distance + 1
+			queue.append(neighbor)
+
+	# Remove origin if you don't want it in the result
+	result.erase(map_position)
+	return result
