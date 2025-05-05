@@ -24,7 +24,6 @@ region_rect = Rect2(80, 0, 16, 16)
 [node name="HealthComponent" parent="." instance=ExtResource("5_3pyd5")]
 
 [node name="MoveComponent" parent="." instance=ExtResource("4_d1d2k")]
-max_turn_count = 2
 
 [node name="AttackComponent" parent="." instance=ExtResource("4_3pyd5")]
 
