@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://df4atta5ddhux"]
+
+[ext_resource type="Script" uid="uid://cwi02nuclrt21" path="res://game/components/defend_component/defend_component.gd" id="1_coysn"]
+[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://game/grid_overlay/grid_overlay.tscn" id="2_pikw2"]
+
+[node name="DefendComponent" type="Node2D" node_paths=PackedStringArray("grid_overlay")]
+top_level = true
+script = ExtResource("1_coysn")
+grid_overlay = NodePath("GridOverlay")
+
+[node name="GridOverlay" parent="." instance=ExtResource("2_pikw2")]

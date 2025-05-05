@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://brwmd6hywtyyt" path="res://addons/state_machine/state_machine.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("game_map", "player", "units")]
+[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "units")]
 script = ExtResource("1_sul5r")
+state_machine = NodePath("StateMachine")
 game_map = NodePath("GameMap")
 player = NodePath("Units/Player")
 units = NodePath("Units")
@@ -20,8 +21,10 @@ script = ExtResource("6_5i0tg")
 initial_state = NodePath("PlayerTurn")
 metadata/_custom_type_script = "uid://brwmd6hywtyyt"
 
-[node name="PlayerTurn" type="Node" parent="StateMachine"]
+[node name="PlayerTurn" type="Node" parent="StateMachine" node_paths=PackedStringArray("action_buttons", "player")]
 script = ExtResource("3_bdhmt")
+action_buttons = NodePath("../../CanvasLayer/MarginContainer/ActionButtons")
+player = NodePath("../../Units/Player")
 
 [node name="EnemyTurn" type="Node" parent="StateMachine"]
 script = ExtResource("4_87uf6")
@@ -35,8 +38,7 @@ action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
 
 [node name="Units" type="Node" parent="."]
 
-[node name="Player" parent="Units" node_paths=PackedStringArray("action_buttons", "game_map") instance=ExtResource("3_0sr1o")]
-action_buttons = NodePath("../../CanvasLayer/MarginContainer/ActionButtons")
+[node name="Player" parent="Units" node_paths=PackedStringArray("game_map") instance=ExtResource("3_0sr1o")]
 game_map = NodePath("../../GameMap")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -45,12 +47,15 @@ game_map = NodePath("../../GameMap")
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -52.0
-offset_right = 63.0
-offset_bottom = 52.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 4.0
 grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ActionButtons" parent="CanvasLayer/MarginContainer" instance=ExtResource("9_2a8rs")]
+[node name="ActionButtons" parent="CanvasLayer/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("9_2a8rs")]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+player = NodePath("../../../Units/Player")

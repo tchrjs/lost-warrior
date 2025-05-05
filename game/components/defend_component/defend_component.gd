@@ -1,4 +1,4 @@
-class_name AttackComponent extends Node2D
+class_name DefendComponent extends Node2D
 
 signal action_finished
 

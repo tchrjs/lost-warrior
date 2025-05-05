@@ -1,19 +1,23 @@
 class_name MoveComponent extends Node
 
-signal finished_moving
+signal action_finished
 
 @export var grid_overlay: GridOverlay
 
-@export var turn_count: int = 1
+@export var max_turn_count: int = 1
 @export var speed: float = 1.5
 @export var distance: int = 3
 
 var path: Array[Vector2i]
 
 @onready var unit: Unit = get_parent()
+@onready var turn_count: int = max_turn_count
+
+func reset() -> void:
+	turn_count = max_turn_count
 
 # Toggle grid overlay of cells the unit can move to.
-func toggle_move_range(toggled_on: bool) -> void:
+func toggle_range(toggled_on: bool) -> void:
 	if toggled_on:
 		grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance, false))
 		grid_overlay.show()
@@ -24,9 +28,17 @@ func toggle_move_range(toggled_on: bool) -> void:
 func has_cell_in_area(cell: Vector2i) -> bool:
 	return grid_overlay.area.has(cell)
 
-# Sets path towards new destination.
-func move_along_path(_path: Array[Vector2i]) -> void:
+func perform_action(_path: Array[Vector2i]) -> void:
+	toggle_range(false)
+
+	turn_count -= 1
+	if turn_count < 0:
+		turn_count = 0
+
 	path = _path
+
+func can_perform_action() -> bool:
+	return turn_count >= 0
 
 # Move towards selected position.
 func _physics_process(_delta: float) -> void:
@@ -46,4 +58,4 @@ func _physics_process(_delta: float) -> void:
 		unit.set_cell_position(path.front())
 		path.pop_front()
 		if path.is_empty():
-			emit_signal("finished_moving")
+			emit_signal("action_finished")
