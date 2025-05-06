@@ -20,7 +20,6 @@ func toggle(toggled_on: bool) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var cell = game_map.get_map_position(event.position)
-		print(cell)
 		if action_buttons.move_button.button_pressed:
 			if player.move_component.has_cell_in_area(cell):
 				action_buttons.set_disabled(true)
@@ -47,12 +46,16 @@ func _on_attack(cell: Vector2i, _mouse_position: Vector2i) -> void:
 		return
 	action_buttons.attack_button.set_pressed_no_signal(false)
 	player.attack(cell)
+	toggle(false)
+	hide()
 
 func _on_defend(cell: Vector2i, _mouse_position: Vector2i) -> void:
 	if not player.defend_component.has_cell_in_area(cell):
 		return
 	action_buttons.defend_button.set_pressed_no_signal(false)
 	player.defend(cell)
+	toggle(false)
+	hide()
 
 func _process(_delta: float) -> void:
 	var mouse_position = get_global_mouse_position()

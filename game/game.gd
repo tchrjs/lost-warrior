@@ -12,6 +12,7 @@ func _ready() -> void:
 	state_machine.enter_initial_state()
 
 	var goblin: Goblin = goblin_scene.instantiate()
+	goblin.player = player
 	goblin.game_map = game_map
 	enemies.add_child(goblin)
 	goblin.set_cell_position(game_map.get_origin_position() + Vector2i(8, 3))

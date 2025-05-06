@@ -23,6 +23,7 @@ func reset() -> void:
 	attack_component.reset()
 
 func _check_all_actions_performed() -> void:
+	await get_tree().create_timer(0.25).timeout
 	if move_component.turn_count != 0:
 		move(player.cell)
 		return

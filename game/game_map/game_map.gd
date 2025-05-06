@@ -26,9 +26,7 @@ func get_origin_position() -> Vector2i:
 func find_path(start_position: Vector2i, end_position: Vector2i) -> Array[Vector2i]:
 	start_point = ground_layer.local_to_map(start_position)
 	end_point = ground_layer.local_to_map(end_position)
-	print(str(start_point) + " " + str(end_point))
 	path = astar_grid.get_id_path(start_point, end_point)
-	print(path)
 	return path
 
 # Returns local position of cell using astar_grid coordinates.
