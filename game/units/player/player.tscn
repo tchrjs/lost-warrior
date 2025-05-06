@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="5_3pyd5"]
 [ext_resource type="PackedScene" uid="uid://df4atta5ddhux" path="res://game/components/defend_component/defend_component.tscn" id="6_unpnx"]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("health_component", "move_component", "attack_component", "defend_component", "sprite")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "defend_component", "sprite", "health_component")]
 script = ExtResource("1_t5cse")
-health_component = NodePath("HealthComponent")
 move_component = NodePath("MoveComponent")
 attack_component = NodePath("AttackComponent")
 defend_component = NodePath("DefendComponent")
 sprite = NodePath("Sprite2D")
+health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1

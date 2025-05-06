@@ -9,12 +9,12 @@
 [ext_resource type="Script" uid="uid://brwmd6hywtyyt" path="res://addons/state_machine/state_machine.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "enemies")]
+[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "enemy_group")]
 script = ExtResource("1_sul5r")
 state_machine = NodePath("StateMachine")
 game_map = NodePath("GameMap")
 player = NodePath("Units/Player")
-enemies = NodePath("Units/Enemies")
+enemy_group = NodePath("Units/EnemyGroup")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_5i0tg")
@@ -32,19 +32,20 @@ player = NodePath("../../Units/Player")
 game = NodePath("../..")
 game_map = NodePath("../../GameMap")
 
-[node name="GameMap" parent="." instance=ExtResource("2_0sr1o")]
+[node name="GameMap" parent="." node_paths=PackedStringArray("game") instance=ExtResource("2_0sr1o")]
+game = NodePath("..")
 
 [node name="GridSelect" parent="." node_paths=PackedStringArray("game_map", "player", "action_buttons") instance=ExtResource("5_lfrn8")]
 game_map = NodePath("../GameMap")
 player = NodePath("../Units/Player")
 action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
 
-[node name="Units" type="Node" parent="."]
+[node name="Units" type="Node2D" parent="."]
 
 [node name="Player" parent="Units" node_paths=PackedStringArray("game_map") instance=ExtResource("3_0sr1o")]
 game_map = NodePath("../../GameMap")
 
-[node name="Enemies" type="Node" parent="Units"]
+[node name="EnemyGroup" type="Node2D" parent="Units"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -3,6 +3,7 @@ class_name GameMap extends Node2D
 const DIRECTIONS = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
 
 @export var ground_layer: TileMapLayer
+@export var game: Game
 
 # The object for pathfinding on 2D grids.
 var astar_grid: AStarGrid2D
@@ -52,6 +53,14 @@ func is_point_walkable(cell: Vector2) -> bool:
 func is_within_grid(local_position: Vector2) -> bool:
 	var map_position: Vector2i = ground_layer.local_to_map(local_position)
 	return astar_grid.is_in_boundsv(map_position)
+
+func get_unit_at(cell: Vector2i) -> Unit:
+	if game.player.cell == cell:
+		return game.player
+	for enemy: Unit in game.enemies:
+		if enemy.cell == cell:
+			return enemy
+	return null
 
 func flood_fill(map_position: Vector2i, max_distance: int, ignore_solid: bool = true) -> Array[Vector2i]:
 	var visited: Dictionary = {}

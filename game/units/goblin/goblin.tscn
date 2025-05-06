@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://game/components/attack_component/attack_component.tscn" id="3_dixf5"]
 [ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="4_a7wnh"]
 
-[node name="Goblin" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "health_component", "sprite")]
+[node name="Goblin" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "sprite", "health_component")]
 script = ExtResource("1_1ym7r")
 move_component = NodePath("MoveComponent")
 attack_component = NodePath("AttackComponent")
-health_component = NodePath("HealthComponent")
 sprite = NodePath("Sprite2D")
+health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1

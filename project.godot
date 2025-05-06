@@ -15,6 +15,10 @@ config/tags=PackedStringArray("game_jam")
 run/main_scene="uid://qejox0nki81w"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
+[autoload]
+
+SignalBus="*res://autoload/signal_bus.gd"
+
 [display]
 
 window/size/viewport_width=320

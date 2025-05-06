@@ -8,9 +8,8 @@ var queue: Array = []
 
 func enter() -> void:
 	queue = []
-	var enemies: Array[Node] = game.enemies.get_children()
-	for enemy in enemies:
-		if enemy is Goblin:
+	for enemy in game.enemies:
+		if is_instance_valid(enemy) and enemy is Goblin:
 			enemy.reset()
 			queue.append(enemy)
 			if !enemy.is_connected("actions_finished", cycle_through_enemies):
@@ -18,6 +17,9 @@ func enter() -> void:
 	cycle_through_enemies()
 
 func cycle_through_enemies() -> void:
+	if !is_instance_valid(player):
+		SignalBus.emit_signal("game_over")
+		return
 	if queue.is_empty():
 		transitioned.emit(self, "playerturn")
 		return
