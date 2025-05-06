@@ -20,6 +20,7 @@ func toggle(toggled_on: bool) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var cell = game_map.get_map_position(event.position)
+		print(cell)
 		if action_buttons.move_button.button_pressed:
 			if player.move_component.has_cell_in_area(cell):
 				action_buttons.set_disabled(true)

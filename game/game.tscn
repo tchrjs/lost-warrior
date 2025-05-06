@@ -9,12 +9,12 @@
 [ext_resource type="Script" uid="uid://brwmd6hywtyyt" path="res://addons/state_machine/state_machine.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "units")]
+[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "enemies")]
 script = ExtResource("1_sul5r")
 state_machine = NodePath("StateMachine")
 game_map = NodePath("GameMap")
 player = NodePath("Units/Player")
-units = NodePath("Units")
+enemies = NodePath("Units/Enemies")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_5i0tg")
@@ -26,8 +26,11 @@ script = ExtResource("3_bdhmt")
 action_buttons = NodePath("../../CanvasLayer/MarginContainer/ActionButtons")
 player = NodePath("../../Units/Player")
 
-[node name="EnemyTurn" type="Node" parent="StateMachine"]
+[node name="EnemyTurn" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "game", "game_map")]
 script = ExtResource("4_87uf6")
+player = NodePath("../../Units/Player")
+game = NodePath("../..")
+game_map = NodePath("../../GameMap")
 
 [node name="GameMap" parent="." instance=ExtResource("2_0sr1o")]
 
@@ -40,6 +43,8 @@ action_buttons = NodePath("../CanvasLayer/MarginContainer/ActionButtons")
 
 [node name="Player" parent="Units" node_paths=PackedStringArray("game_map") instance=ExtResource("3_0sr1o")]
 game_map = NodePath("../../GameMap")
+
+[node name="Enemies" type="Node" parent="Units"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

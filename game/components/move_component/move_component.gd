@@ -2,6 +2,8 @@ class_name MoveComponent extends Node
 
 signal action_finished
 
+const DIRECTIONS = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
+
 @export var grid_overlay: GridOverlay
 
 @export var max_turn_count: int = 1
@@ -39,6 +41,23 @@ func perform_action(_path: Array[Vector2i]) -> void:
 
 func can_perform_action() -> bool:
 	return turn_count >= 0
+
+func get_closest_point(cell: Vector2i) -> Vector2i:
+	grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance, false))
+	var closest_point: Vector2i = unit.cell
+	var min_dist := INF
+
+	for direction in DIRECTIONS:
+		if closest_point == cell + direction:
+			return closest_point
+
+	for point in grid_overlay.area:
+		for direction in DIRECTIONS:
+			var dist = point.distance_to(cell + direction)
+			if dist < min_dist:
+				min_dist = dist
+				closest_point = point
+	return closest_point
 
 # Move towards selected position.
 func _physics_process(_delta: float) -> void:

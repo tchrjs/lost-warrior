@@ -20,6 +20,7 @@ region_enabled = true
 region_rect = Rect2(64, 16, 16, 16)
 
 [node name="MoveComponent" parent="." instance=ExtResource("2_1ym7r")]
+distance = 2
 
 [node name="AttackComponent" parent="." instance=ExtResource("3_dixf5")]
 
