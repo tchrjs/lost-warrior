@@ -57,8 +57,8 @@ func is_within_grid(local_position: Vector2) -> bool:
 func get_unit_at(cell: Vector2i) -> Unit:
 	if game.player.cell == cell:
 		return game.player
-	for enemy: Unit in game.enemies:
-		if enemy.cell == cell:
+	for enemy in game.enemies:
+		if is_instance_valid(enemy) and enemy.cell == cell:
 			return enemy
 	return null
 
