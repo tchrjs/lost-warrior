@@ -25,3 +25,4 @@ distance = 2
 [node name="AttackComponent" parent="." instance=ExtResource("3_dixf5")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_a7wnh")]
+max_health = 2
