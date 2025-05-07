@@ -4,6 +4,7 @@ class_name Game extends Node
 @export var game_map: GameMap
 @export var player: Player
 @export var enemy_group: Node2D
+@export var game_over_screen: Control
 
 var enemies: Array = []
 
@@ -23,5 +24,4 @@ func _ready() -> void:
 	goblin.sprite.flip_h = goblin.cell > player.cell
 
 func _on_game_over() -> void:
-	print("game over")
-	pass
+	game_over_screen.show()
