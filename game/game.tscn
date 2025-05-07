@@ -1,14 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://qejox0nki81w"]
+[gd_scene load_steps=13 format=3 uid="uid://qejox0nki81w"]
 
 [ext_resource type="Script" uid="uid://0ho56f0t08re" path="res://game/game.gd" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://et0ngbb4rcs8" path="res://game/game_map/game_map.tscn" id="2_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://v2e7x3fbjtap" path="res://game/units/player/player.tscn" id="3_0sr1o"]
 [ext_resource type="Script" uid="uid://cedqpjvaak740" path="res://game/states/player_turn.gd" id="3_bdhmt"]
 [ext_resource type="Script" uid="uid://dw81mb5caitsa" path="res://game/states/enemy_turn.gd" id="4_87uf6"]
+[ext_resource type="Script" uid="uid://ci8ha2oqclif0" path="res://game/states/win.gd" id="5_3vho3"]
 [ext_resource type="PackedScene" uid="uid://bpik76b7iulsb" path="res://game/grid_select/grid_select.tscn" id="5_lfrn8"]
+[ext_resource type="Script" uid="uid://dut7ouvn2qoh0" path="res://game/states/lose.gd" id="6_3vho3"]
 [ext_resource type="Script" uid="uid://brwmd6hywtyyt" path="res://addons/state_machine/state_machine.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://d3a0ux8kxfpug" path="res://game/action_buttons/action_buttons.tscn" id="9_2a8rs"]
 [ext_resource type="Theme" uid="uid://doau1vx6lmsei" path="res://resources/game_ui_theme.tres" id="9_l8g03"]
+[ext_resource type="PackedScene" uid="uid://doae4q0upb8gr" path="res://game/level_counter/level_counter.tscn" id="10_qf6n1"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "enemy_group", "game_over_screen")]
 script = ExtResource("1_sul5r")
@@ -18,21 +21,34 @@ player = NodePath("Units/Player")
 enemy_group = NodePath("Units/EnemyGroup")
 game_over_screen = NodePath("CanvasLayer/GameOverScreen")
 
+[node name="EnemySpawner" type="Node" parent="."]
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_5i0tg")
 initial_state = NodePath("PlayerTurn")
 metadata/_custom_type_script = "uid://brwmd6hywtyyt"
 
-[node name="PlayerTurn" type="Node" parent="StateMachine" node_paths=PackedStringArray("action_buttons", "player")]
+[node name="PlayerTurn" type="Node" parent="StateMachine" node_paths=PackedStringArray("action_buttons", "player", "enemy_group")]
 script = ExtResource("3_bdhmt")
 action_buttons = NodePath("../../CanvasLayer/MarginContainer/ActionButtons")
 player = NodePath("../../Units/Player")
+enemy_group = NodePath("../../Units/EnemyGroup")
 
-[node name="EnemyTurn" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "game", "game_map")]
+[node name="EnemyTurn" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "game", "game_map", "enemy_group")]
 script = ExtResource("4_87uf6")
 player = NodePath("../../Units/Player")
 game = NodePath("../..")
 game_map = NodePath("../../GameMap")
+enemy_group = NodePath("../../Units/EnemyGroup")
+
+[node name="Win" type="Node" parent="StateMachine" node_paths=PackedStringArray("level_counter")]
+script = ExtResource("5_3vho3")
+level_counter = NodePath("../../CanvasLayer/LevelCounter")
+metadata/_custom_type_script = "uid://lyh78ppnftnq"
+
+[node name="Lose" type="Node" parent="StateMachine"]
+script = ExtResource("6_3vho3")
+metadata/_custom_type_script = "uid://lyh78ppnftnq"
 
 [node name="GameMap" parent="." node_paths=PackedStringArray("game") instance=ExtResource("2_0sr1o")]
 game = NodePath("..")
@@ -51,21 +67,7 @@ game_map = NodePath("../../GameMap")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="LevelCounter" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-theme = ExtResource("9_l8g03")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelCounter"]
-layout_mode = 1
-offset_right = 60.0
-offset_bottom = 18.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-
-[node name="Label" type="Label" parent="CanvasLayer/LevelCounter/MarginContainer"]
-layout_mode = 2
-text = "Level: 1"
+[node name="LevelCounter" parent="CanvasLayer" instance=ExtResource("10_qf6n1")]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 4

@@ -3,6 +3,7 @@ class_name EnemyTurn extends State
 @export var player: Player
 @export var game: Game
 @export var game_map: GameMap
+@export var enemy_group: Node2D
 
 var queue: Array = []
 
@@ -18,6 +19,7 @@ func enter() -> void:
 
 func cycle_through_enemies() -> void:
 	if !is_instance_valid(player):
+		transitioned.emit(self, "lose")
 		SignalBus.emit_signal("game_over")
 		return
 	if queue.is_empty():

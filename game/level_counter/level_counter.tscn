@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://doae4q0upb8gr"]
+
+[ext_resource type="Theme" uid="uid://doau1vx6lmsei" path="res://resources/game_ui_theme.tres" id="1_y45x0"]
+[ext_resource type="Script" uid="uid://bgtydwaxig7g8" path="res://game/level_counter/level_counter.gd" id="2_plt3t"]
+
+[node name="LevelCounter" type="Control" node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_y45x0")
+script = ExtResource("2_plt3t")
+label = NodePath("MarginContainer/Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 60.0
+offset_bottom = 18.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Level: 1"

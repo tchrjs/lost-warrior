@@ -15,4 +15,5 @@ func set_cell_position(_cell: Vector2i) -> void:
 
 func _on_death() -> void:
 	game_map.astar_grid.set_point_solid(cell, false)
+	get_parent().remove_child(self)
 	queue_free()
