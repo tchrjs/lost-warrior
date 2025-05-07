@@ -7,4 +7,4 @@ func draw(_cells: Array[Vector2i]) -> void:
 	clear()
 
 	for cell in area:
-		set_cell(cell, 0, Vector2i(9, 6))
+		set_cell(cell, 0, Vector2i(9, 9))

@@ -19,9 +19,10 @@ func move(destination: Vector2i) -> void:
 
 func attack() -> void:
 	if attack_component.get_range().has(player.cell):
-		attack_component.perform_action(player.cell)
+		attack_component.perform_action(player.cell, player.defend_component.cell != cell)
 	else:
-		attack_component.perform_action(Vector2i.ZERO)
+		attack_component.perform_action(player.cell, false)
+
 
 func reset() -> void:
 	move_component.reset()

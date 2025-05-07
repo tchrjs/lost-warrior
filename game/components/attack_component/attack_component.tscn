@@ -9,3 +9,4 @@ script = ExtResource("1_htgjh")
 grid_overlay = NodePath("GridOverlay")
 
 [node name="GridOverlay" parent="." instance=ExtResource("2_w0ksp")]
+modulate = Color(0.832415, 0.327211, 0.471789, 0.392157)

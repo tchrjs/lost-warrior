@@ -30,7 +30,7 @@ func get_range() -> Array:
 	grid_overlay.draw(unit.game_map.flood_fill(unit.cell, distance))
 	return grid_overlay.area
 
-func perform_action(cell: Vector2i) -> void:
+func perform_action(cell: Vector2i, success: bool = false) -> void:
 	toggle_range(false)
 
 	turn_count -= 1
@@ -43,7 +43,7 @@ func perform_action(cell: Vector2i) -> void:
 
 		var target: Unit = unit.game_map.get_unit_at(cell)
 		if target != null:
-			target.health_component.damage(damage)
+			target.health_component.damage(damage if success else 0)
 	emit_signal("action_finished")
 
 func can_perform_action() -> bool:

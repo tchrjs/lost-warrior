@@ -1,5 +1,6 @@
 class_name HealthComponent extends Node2D
 
+signal was_damaged
 signal has_died
 
 @export var max_health: int = 1
@@ -8,6 +9,6 @@ signal has_died
 
 func damage(_damage: int) -> void:
 	health -= _damage
+	emit_signal("was_damaged")
 	if health <= 0:
-		print("has_died")
 		emit_signal("has_died")
