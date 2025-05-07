@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://w424eju21yrc"]
+
+[ext_resource type="Script" uid="uid://13w10sy3smi5" path="res://game/units/ghost/ghost.gd" id="1_2477e"]
+[ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="2_i015j"]
+[ext_resource type="PackedScene" uid="uid://4bje0lbbccnr" path="res://game/components/move_component/move_component.tscn" id="3_ws1md"]
+[ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://game/components/attack_component/attack_component.tscn" id="4_vqg4b"]
+[ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="5_uj4rx"]
+
+[node name="Ghost" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "sprite", "health_component")]
+script = ExtResource("1_2477e")
+move_component = NodePath("MoveComponent")
+attack_component = NodePath("AttackComponent")
+sprite = NodePath("Sprite2D")
+health_component = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_i015j")
+region_enabled = true
+region_rect = Rect2(16, 16, 16, 16)
+
+[node name="MoveComponent" parent="." instance=ExtResource("3_ws1md")]
+
+[node name="AttackComponent" parent="." instance=ExtResource("4_vqg4b")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_uj4rx")]

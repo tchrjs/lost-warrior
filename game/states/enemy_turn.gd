@@ -9,8 +9,8 @@ var queue: Array = []
 
 func enter() -> void:
 	queue = []
-	for enemy in game.enemies:
-		if is_instance_valid(enemy) and enemy is Goblin:
+	for enemy in game.enemy_spawner.enemies:
+		if is_instance_valid(enemy) and enemy is Unit:
 			enemy.reset()
 			queue.append(enemy)
 			if !enemy.is_connected("actions_finished", cycle_through_enemies):
@@ -25,7 +25,7 @@ func cycle_through_enemies() -> void:
 	if queue.is_empty():
 		transitioned.emit(self, "playerturn")
 		return
-	var enemy: Goblin = queue.pop_front()
+	var enemy: Unit = queue.pop_front()
 	for action in enemy.actions:
 		enemy.call(action, player.cell)
 

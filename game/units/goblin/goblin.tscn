@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://w424eju21yrc"]
+[gd_scene load_steps=6 format=3 uid="uid://d4bsgqc7evbkb"]
 
-[ext_resource type="Script" uid="uid://13w10sy3smi5" path="res://game/units/goblin/goblin.gd" id="1_1ym7r"]
-[ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="1_ooinq"]
-[ext_resource type="PackedScene" uid="uid://4bje0lbbccnr" path="res://game/components/move_component/move_component.tscn" id="2_1ym7r"]
-[ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://game/components/attack_component/attack_component.tscn" id="3_dixf5"]
-[ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="4_a7wnh"]
+[ext_resource type="Script" uid="uid://jxba3qq21h20" path="res://game/units/goblin/goblin.gd" id="1_1ym7r"]
+[ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="2_227i4"]
+[ext_resource type="PackedScene" uid="uid://4bje0lbbccnr" path="res://game/components/move_component/move_component.tscn" id="3_sypes"]
+[ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://game/components/attack_component/attack_component.tscn" id="4_x5ypu"]
+[ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="5_j84mq"]
 
 [node name="Goblin" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "sprite", "health_component")]
 script = ExtResource("1_1ym7r")
@@ -15,14 +15,14 @@ health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-texture = ExtResource("1_ooinq")
+texture = ExtResource("2_227i4")
 region_enabled = true
 region_rect = Rect2(64, 16, 16, 16)
 
-[node name="MoveComponent" parent="." instance=ExtResource("2_1ym7r")]
+[node name="MoveComponent" parent="." instance=ExtResource("3_sypes")]
 distance = 2
 
-[node name="AttackComponent" parent="." instance=ExtResource("3_dixf5")]
+[node name="AttackComponent" parent="." instance=ExtResource("4_x5ypu")]
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_a7wnh")]
+[node name="HealthComponent" parent="." instance=ExtResource("5_j84mq")]
 max_health = 2

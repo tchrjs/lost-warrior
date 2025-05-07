@@ -1,4 +1,4 @@
-class_name Goblin extends Unit
+class_name Ghost extends Unit
 
 signal actions_finished
 

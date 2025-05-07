@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://df4atta5ddhux" path="res://game/components/defend_component/defend_component.tscn" id="6_unpnx"]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "defend_component", "sprite", "health_component")]
+top_level = true
 script = ExtResource("1_t5cse")
 move_component = NodePath("MoveComponent")
 attack_component = NodePath("AttackComponent")
@@ -17,14 +18,18 @@ health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+position = Vector2(-1, 0)
 texture = ExtResource("1_4m2od")
 region_enabled = true
 region_rect = Rect2(80, 0, 16, 16)
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_3pyd5")]
-visible = false
+top_level = true
+position = Vector2(25, 35)
+max_health = 3
 
 [node name="MoveComponent" parent="." instance=ExtResource("4_d1d2k")]
+distance = 4
 
 [node name="AttackComponent" parent="." instance=ExtResource("4_3pyd5")]
 

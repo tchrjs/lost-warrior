@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://qejox0nki81w"]
+[gd_scene load_steps=14 format=3 uid="uid://qejox0nki81w"]
 
 [ext_resource type="Script" uid="uid://0ho56f0t08re" path="res://game/game.gd" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://et0ngbb4rcs8" path="res://game/game_map/game_map.tscn" id="2_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://bgaydfvlnnd7l" path="res://game/enemy_spawner/enemy_spawner.tscn" id="2_vsp63"]
 [ext_resource type="PackedScene" uid="uid://v2e7x3fbjtap" path="res://game/units/player/player.tscn" id="3_0sr1o"]
 [ext_resource type="Script" uid="uid://cedqpjvaak740" path="res://game/states/player_turn.gd" id="3_bdhmt"]
 [ext_resource type="Script" uid="uid://dw81mb5caitsa" path="res://game/states/enemy_turn.gd" id="4_87uf6"]
@@ -13,15 +14,19 @@
 [ext_resource type="Theme" uid="uid://doau1vx6lmsei" path="res://resources/game_ui_theme.tres" id="9_l8g03"]
 [ext_resource type="PackedScene" uid="uid://doae4q0upb8gr" path="res://game/level_counter/level_counter.tscn" id="10_qf6n1"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "enemy_group", "game_over_screen")]
+[node name="Game" type="Node" node_paths=PackedStringArray("state_machine", "game_map", "player", "enemy_spawner", "game_over_screen")]
 script = ExtResource("1_sul5r")
 state_machine = NodePath("StateMachine")
 game_map = NodePath("GameMap")
 player = NodePath("Units/Player")
-enemy_group = NodePath("Units/EnemyGroup")
+enemy_spawner = NodePath("EnemySpawner")
 game_over_screen = NodePath("CanvasLayer/GameOverScreen")
 
-[node name="EnemySpawner" type="Node" parent="."]
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("game_map", "player", "enemy_group", "level_counter") instance=ExtResource("2_vsp63")]
+game_map = NodePath("../GameMap")
+player = NodePath("../Units/Player")
+enemy_group = NodePath("../Units/EnemyGroup")
+level_counter = NodePath("../CanvasLayer/LevelCounter")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_5i0tg")
@@ -41,9 +46,10 @@ game = NodePath("../..")
 game_map = NodePath("../../GameMap")
 enemy_group = NodePath("../../Units/EnemyGroup")
 
-[node name="Win" type="Node" parent="StateMachine" node_paths=PackedStringArray("level_counter")]
+[node name="Win" type="Node" parent="StateMachine" node_paths=PackedStringArray("level_counter", "enemy_spawner")]
 script = ExtResource("5_3vho3")
 level_counter = NodePath("../../CanvasLayer/LevelCounter")
+enemy_spawner = NodePath("../../EnemySpawner")
 metadata/_custom_type_script = "uid://lyh78ppnftnq"
 
 [node name="Lose" type="Node" parent="StateMachine"]

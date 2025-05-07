@@ -42,9 +42,38 @@ func perform_action(cell: Vector2i, success: bool = false) -> void:
 			unit.sprite.flip_h = cell.x < unit.cell.x
 
 		var target: Unit = unit.game_map.get_unit_at(cell)
-		if target != null:
+		if target != null and grid_overlay.area.has(cell):
 			target.health_component.damage(damage if success else 0)
+			await play_attack_animation(target)
 	emit_signal("action_finished")
+
+func play_attack_animation(target: Unit) -> void:
+	var start_pos := unit.position
+	var x = 0
+	if target.cell.x < unit.cell.x:
+		x = 5
+	elif target.cell.x > unit.cell.x:
+		x = -5
+	else:
+		x = 0
+
+	var y = 0
+	if target.cell.y < unit.cell.y:
+		y = 5
+	elif target.cell.y > unit.cell.y:
+		y = -5
+	else:
+		y = 0
+
+	var peak_pos := start_pos - Vector2(x, y)
+	var end_pos := start_pos
+
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(unit, "position", peak_pos, 0.15)
+	tween.tween_property(unit, "position", end_pos, 0.15).set_ease(Tween.EASE_IN)
+	await tween.finished
 
 func can_perform_action() -> bool:
 	return turn_count >= 0

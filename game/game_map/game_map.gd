@@ -57,10 +57,21 @@ func is_within_grid(local_position: Vector2) -> bool:
 func get_unit_at(cell: Vector2i) -> Unit:
 	if game.player.cell == cell:
 		return game.player
-	for enemy in game.enemies:
+	for enemy in game.enemy_spawner.enemies:
 		if is_instance_valid(enemy) and enemy.cell == cell:
 			return enemy
 	return null
+
+func get_random_walkable_cell() -> Vector2i:
+	var walkable_cells: Array[Vector2i] = []
+
+	for i in range(astar_grid.region.position.x, astar_grid.region.end.x):
+		for j in range(astar_grid.region.position.y, astar_grid.region.end.y):
+			var pos = Vector2i(i, j)
+			if not astar_grid.is_point_solid(pos):
+				walkable_cells.append(pos)
+
+	return walkable_cells[randi() % walkable_cells.size()]
 
 func flood_fill(map_position: Vector2i, max_distance: int, ignore_solid: bool = true) -> Array[Vector2i]:
 	var visited: Dictionary = {}
