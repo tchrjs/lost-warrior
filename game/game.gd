@@ -25,3 +25,7 @@ func _ready() -> void:
 
 func _on_game_over() -> void:
 	game_over_screen.show()
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()

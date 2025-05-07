@@ -51,6 +51,22 @@ game_map = NodePath("../../GameMap")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="LevelCounter" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("9_l8g03")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelCounter"]
+layout_mode = 1
+offset_right = 60.0
+offset_bottom = 18.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/LevelCounter/MarginContainer"]
+layout_mode = 2
+text = "Level: 1"
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 4
 anchor_top = 0.5
@@ -113,7 +129,9 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button" type="Button" parent="CanvasLayer/GameOverScreen/VBoxContainer/HBoxContainer"]
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOverScreen/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("9_l8g03")
 text = "restart"
+
+[connection signal="pressed" from="CanvasLayer/GameOverScreen/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
