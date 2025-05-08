@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	player.reset()
+	action_buttons.update()
 	action_buttons.set_disabled(false)
 
 func exit() -> void:

@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://v2e7x3fbjtap"]
+[gd_scene load_steps=10 format=3 uid="uid://v2e7x3fbjtap"]
 
 [ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="1_4m2od"]
 [ext_resource type="Script" uid="uid://dsjvmm0wdbtph" path="res://game/units/player/player.gd" id="1_t5cse"]
-[ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://game/components/attack_component/attack_component.tscn" id="4_3pyd5"]
 [ext_resource type="PackedScene" uid="uid://4bje0lbbccnr" path="res://game/components/move_component/move_component.tscn" id="4_d1d2k"]
+[ext_resource type="Script" uid="uid://d2nb7dq1yy4ih" path="res://game/components/attack_component/attack_component.gd" id="5_1gpq6"]
 [ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="5_3pyd5"]
+[ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://game/grid_overlay/grid_overlay.tscn" id="6_q3273"]
 [ext_resource type="PackedScene" uid="uid://df4atta5ddhux" path="res://game/components/defend_component/defend_component.tscn" id="6_unpnx"]
+[ext_resource type="AudioStream" uid="uid://bvfdjh0ty4qcj" path="res://assets/audio/knife_hit.mp3" id="7_1gpq6"]
+[ext_resource type="AudioStream" uid="uid://cj603u5aaqexs" path="res://assets/audio/block.mp3" id="8_prpxi"]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "defend_component", "sprite", "health_component")]
 top_level = true
@@ -31,6 +34,21 @@ max_health = 3
 [node name="MoveComponent" parent="." instance=ExtResource("4_d1d2k")]
 distance = 4
 
-[node name="AttackComponent" parent="." instance=ExtResource("4_3pyd5")]
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("grid_overlay", "hit", "block")]
+top_level = true
+script = ExtResource("5_1gpq6")
+grid_overlay = NodePath("GridOverlay")
+hit = NodePath("Hit")
+block = NodePath("Block")
+max_turn_count = 2
+
+[node name="GridOverlay" parent="AttackComponent" instance=ExtResource("6_q3273")]
+modulate = Color(0.832415, 0.327211, 0.471789, 0.392157)
+
+[node name="Hit" type="AudioStreamPlayer" parent="AttackComponent"]
+stream = ExtResource("7_1gpq6")
+
+[node name="Block" type="AudioStreamPlayer" parent="AttackComponent"]
+stream = ExtResource("8_prpxi")
 
 [node name="DefendComponent" parent="." instance=ExtResource("6_unpnx")]

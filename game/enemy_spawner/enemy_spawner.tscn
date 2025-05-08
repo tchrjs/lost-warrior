@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgaydfvlnnd7l"]
+[gd_scene load_steps=3 format=3 uid="uid://bgaydfvlnnd7l"]
 
 [ext_resource type="Script" uid="uid://dygyln512f132" path="res://game/enemy_spawner/enemy_spawner.gd" id="1_y3q26"]
+[ext_resource type="AudioStream" uid="uid://biw028ft03x2u" path="res://assets/audio/spawn.mp3" id="2_mu6jj"]
 
-[node name="EnemySpawner" type="Node"]
+[node name="EnemySpawner" type="Node" node_paths=PackedStringArray("sound")]
 script = ExtResource("1_y3q26")
+sound = NodePath("Spawn")
+
+[node name="Spawn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mu6jj")

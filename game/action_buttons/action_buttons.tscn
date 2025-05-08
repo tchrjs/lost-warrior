@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3a0ux8kxfpug"]
+[gd_scene load_steps=4 format=3 uid="uid://d3a0ux8kxfpug"]
 
 [ext_resource type="Theme" uid="uid://doau1vx6lmsei" path="res://resources/game_ui_theme.tres" id="1_h0lyd"]
 [ext_resource type="Script" uid="uid://c6cfqduv843qd" path="res://game/action_buttons/action_buttons.gd" id="1_jjd2i"]
+[ext_resource type="AudioStream" uid="uid://c11bsfh836n2c" path="res://assets/audio/button.mp3" id="3_g4s2c"]
 
-[node name="ActionButtons" type="Control" node_paths=PackedStringArray("move_button", "attack_button", "defend_button")]
+[node name="ActionButtons" type="Control" node_paths=PackedStringArray("sound", "move_button", "attack_button", "defend_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_h0lyd")
 script = ExtResource("1_jjd2i")
+sound = NodePath("Button")
 move_button = NodePath("VBoxContainer/MoveButton")
 attack_button = NodePath("VBoxContainer/AttackButton")
 defend_button = NodePath("VBoxContainer/DefendButton")
+
+[node name="Button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g4s2c")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

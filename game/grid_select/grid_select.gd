@@ -15,6 +15,7 @@ func _ready() -> void:
 func toggle(toggled_on: bool) -> void:
 	set_process_input(toggled_on)
 	set_process(toggled_on)
+	action_buttons.update()
 
 # Find path from player to mouse event click
 func _input(event: InputEvent) -> void:
@@ -22,6 +23,7 @@ func _input(event: InputEvent) -> void:
 		var cell = game_map.get_map_position(event.position)
 		if action_buttons.move_button.button_pressed:
 			if player.move_component.has_cell_in_area(cell):
+				$Select.play()
 				action_buttons.set_disabled(true)
 				_on_move(cell, event.position)
 		elif action_buttons.attack_button.button_pressed:

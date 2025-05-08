@@ -1,12 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://5mktnhn7lyx4"]
+[gd_scene load_steps=5 format=3 uid="uid://5mktnhn7lyx4"]
 
 [ext_resource type="Script" uid="uid://d2nb7dq1yy4ih" path="res://game/components/attack_component/attack_component.gd" id="1_htgjh"]
 [ext_resource type="PackedScene" uid="uid://bsh5154115yxs" path="res://game/grid_overlay/grid_overlay.tscn" id="2_w0ksp"]
+[ext_resource type="AudioStream" uid="uid://dccjijo5qom7r" path="res://assets/audio/hit.mp3" id="3_efeyt"]
+[ext_resource type="AudioStream" uid="uid://cj603u5aaqexs" path="res://assets/audio/block.mp3" id="4_rx6u4"]
 
-[node name="AttackComponent" type="Node2D" node_paths=PackedStringArray("grid_overlay")]
+[node name="AttackComponent" type="Node2D" node_paths=PackedStringArray("grid_overlay", "hit", "block")]
 top_level = true
 script = ExtResource("1_htgjh")
 grid_overlay = NodePath("GridOverlay")
+hit = NodePath("Hit")
+block = NodePath("Block")
 
 [node name="GridOverlay" parent="." instance=ExtResource("2_w0ksp")]
 modulate = Color(0.832415, 0.327211, 0.471789, 0.392157)
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_efeyt")
+
+[node name="Block" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rx6u4")

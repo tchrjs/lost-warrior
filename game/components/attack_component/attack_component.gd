@@ -3,6 +3,8 @@ class_name AttackComponent extends Node2D
 signal action_finished
 
 @export var grid_overlay: GridOverlay
+@export var hit: AudioStreamPlayer
+@export var block: AudioStreamPlayer
 
 @export var max_turn_count: int = 1
 @export var damage: int = 1
@@ -43,6 +45,10 @@ func perform_action(cell: Vector2i, success: bool = false) -> void:
 
 		var target: Unit = unit.game_map.get_unit_at(cell)
 		if target != null and grid_overlay.area.has(cell):
+			if success:
+				hit.play()
+			else:
+				block.play()
 			target.health_component.damage(damage if success else 0, unit)
 			await play_attack_animation(target)
 	emit_signal("action_finished")

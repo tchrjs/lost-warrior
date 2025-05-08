@@ -20,7 +20,8 @@ func damage(_damage: int, attacker: Unit) -> void:
 	if _damage > 0:
 		emit_signal("was_damaged", attacker)
 		_on_damaged()
-		remove_heart()
+		for i in _damage:
+			remove_heart()
 	else:
 		_on_block()
 
@@ -28,6 +29,9 @@ func damage(_damage: int, attacker: Unit) -> void:
 		emit_signal("has_died")
 
 func remove_heart() -> void:
+	var count = heart_container.get_child_count()
+	if count <= 0:
+		return
 	var heart: Node = heart_container.get_child(0)
 	heart.queue_free()
 	heart_container.remove_child(heart)

@@ -4,6 +4,7 @@ class_name EnemySpawner extends Node
 @export var player: Player
 @export var enemy_group: Node2D
 @export var level_counter: LevelCounter
+@export var sound: AudioStreamPlayer
 
 var enemies: Array = []
 
@@ -26,6 +27,7 @@ func spawn_enemies(level: int) -> void:
 				spawn_ghost(game_map.get_random_walkable_cell(), true)
 			elif rand == 2:
 				spawn_zombie(game_map.get_random_walkable_cell(), true)
+		sound.play()
 		await get_tree().create_timer(0.25).timeout
 
 func spawn_ghost(cell: Vector2i, play_animation: bool = false) -> void:
