@@ -34,5 +34,6 @@ func _on_action_finished() -> void:
 func _on_death() -> void:
 	queue_free()
 
-func _on_damaged() -> void:
-	defend_component.clear_cell()
+func _on_damaged(attacker: Unit) -> void:
+	if attacker.cell == defend_component.cell:
+		defend_component.clear_cell()

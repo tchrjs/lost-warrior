@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgtfw7qpoly2x"]
+
+[ext_resource type="Script" uid="uid://cgn6hkvtnsshb" path="res://game/units/zombie/zombie.gd" id="1_4v2ih"]
+[ext_resource type="Texture2D" uid="uid://duxte6d2wt3j7" path="res://assets/art/character.png" id="2_24t0s"]
+[ext_resource type="PackedScene" uid="uid://4bje0lbbccnr" path="res://game/components/move_component/move_component.tscn" id="3_7lmri"]
+[ext_resource type="PackedScene" uid="uid://5mktnhn7lyx4" path="res://game/components/attack_component/attack_component.tscn" id="4_7mlje"]
+[ext_resource type="PackedScene" uid="uid://c2j2e6duiwdad" path="res://game/components/health_component/health_component.tscn" id="5_e18yq"]
+
+[node name="Zombie" type="Node2D" node_paths=PackedStringArray("move_component", "attack_component", "sprite", "health_component")]
+script = ExtResource("1_4v2ih")
+move_component = NodePath("MoveComponent")
+attack_component = NodePath("AttackComponent")
+sprite = NodePath("Sprite2D")
+health_component = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_24t0s")
+region_enabled = true
+region_rect = Rect2(48, 16, 16, 16)
+
+[node name="MoveComponent" parent="." instance=ExtResource("3_7lmri")]
+distance = 1
+
+[node name="AttackComponent" parent="." instance=ExtResource("4_7mlje")]
+max_turn_count = 2
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_e18yq")]
+max_health = 3

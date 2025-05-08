@@ -43,7 +43,7 @@ func perform_action(cell: Vector2i, success: bool = false) -> void:
 
 		var target: Unit = unit.game_map.get_unit_at(cell)
 		if target != null and grid_overlay.area.has(cell):
-			target.health_component.damage(damage if success else 0)
+			target.health_component.damage(damage if success else 0, unit)
 			await play_attack_animation(target)
 	emit_signal("action_finished")
 

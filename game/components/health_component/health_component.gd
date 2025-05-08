@@ -1,6 +1,6 @@
 class_name HealthComponent extends Node2D
 
-signal was_damaged
+signal was_damaged(unit: Unit)
 signal has_died
 
 @export var max_health: int = 1
@@ -15,10 +15,10 @@ func _ready() -> void:
 		var heart: Node = heart_scene.instantiate()
 		heart_container.add_child(heart)
 
-func damage(_damage: int) -> void:
+func damage(_damage: int, attacker: Unit) -> void:
 	health -= _damage
 	if _damage > 0:
-		emit_signal("was_damaged")
+		emit_signal("was_damaged", attacker)
 		_on_damaged()
 		remove_heart()
 	else:
